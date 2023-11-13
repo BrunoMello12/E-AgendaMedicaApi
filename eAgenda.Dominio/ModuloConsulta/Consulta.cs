@@ -10,6 +10,12 @@ namespace eAgenda.Dominio.ModuloConsulta
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraTermino { get; set; }
         public Medico Medico { get; set; }
+        public Guid MedicoId { get; set; }
+
+        public Consulta()
+        {
+            
+        }
 
         public Consulta(string titulo, TimeSpan horaInicio, TimeSpan horaTermino, Medico medico)
         {

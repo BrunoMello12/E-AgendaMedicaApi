@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eAgenda.Dominio.Compartilhado;
+using eAgenda.Dominio.ModuloCirurgia;
+using eAgenda.Infra.Orm.Compartilhado;
 
 namespace eAgenda.Infra.Orm.ModuloCirurgia
 {
-    internal class RepositorioCirurgiaOrm
+    public class RepositorioCirurgiaOrm : RepositorioBase<Cirurgia>
     {
+        public RepositorioCirurgiaOrm(IContextoPersistencia contextoPersistencia) : base(contextoPersistencia)
+        {
+        }
     }
 }
