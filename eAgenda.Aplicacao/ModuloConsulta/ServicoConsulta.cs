@@ -1,12 +1,89 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using eAgenda.Dominio.Compartilhado;
+using eAgenda.Dominio.ModuloConsulta;
+using FluentResults;
+using Serilog;
 
 namespace eAgenda.Aplicacao.ModuloConsulta
 {
-    internal class ServicoConsulta
+    public class ServicoConsulta : ServicoBase<Consulta, ValidadorConsulta>
     {
+        private IRepositorioConsulta repositorioConsulta;
+        private IContextoPersistencia contextoPersistencia;
+
+        public ServicoConsulta(
+            IRepositorioConsulta repositorioConsulta,
+            IContextoPersistencia contexto)
+        {
+            this.repositorioConsulta = repositorioConsulta;
+            this.contextoPersistencia = contexto;
+        }
+
+        public async Task<Result<Consulta>> InserirAsync(Consulta consulta)
+        {
+            Result resultado = Validar(consulta);
+
+            if (resultado.IsFailed)
+                return Result.Fail(resultado.Errors);
+
+            await repositorioConsulta.InserirAsync(consulta);
+
+            await contextoPersistencia.GravarDadosAsync();
+
+            return Result.Ok(consulta);
+        }
+
+        public async Task<Result<Consulta>> EditarAsync(Consulta consulta)
+        {
+            var resultado = Validar(consulta);
+
+            if (resultado.IsFailed)
+                return Result.Fail(resultado.Errors);
+
+            await repositorioConsulta.EditarAsync(consulta);
+
+            await contextoPersistencia.GravarDadosAsync();
+
+            return Result.Ok(consulta);
+        }
+
+        public async Task<Result> ExcluirAsync(Guid id)
+        {
+            var consultaResult = await SelecionarPorIdAsync(id);
+
+            if (consultaResult.IsSuccess)
+                return await ExcluirAsync(consultaResult.Value);
+
+            return Result.Fail(consultaResult.Errors);
+        }
+
+        public async Task<Result> ExcluirAsync(Consulta consulta)
+        {
+            await repositorioConsulta.ExcluirAsync(consulta);
+
+            await contextoPersistencia.GravarDadosAsync();
+
+            return Result.Ok();
+        }
+
+        public async Task<Result<List<Consulta>>> SelecionarTodosAsync()
+        {
+            var consultas = await repositorioConsulta.SelecionarTodosAsync();
+
+            return Result.Ok(consultas);
+        }
+
+        public async Task<Result<Consulta>> SelecionarPorIdAsync(Guid id)
+        {
+            var consulta = await repositorioConsulta.SelecionarPorIdAsync(id);
+
+            if (consulta == null)
+            {
+                Log.Logger.Warning($"Consulta {id} não encontrada", id);
+
+                return Result.Fail($"Consulta {id} não encontrada");
+            }
+
+            return Result.Ok(consulta);
+        }
     }
 }
