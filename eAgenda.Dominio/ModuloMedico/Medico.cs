@@ -18,21 +18,17 @@ namespace eAgenda.Dominio.ModuloMedico
             
         }
 
-        public Medico(string nome, string telefone, bool disponivel, string cRM, List<Cirurgia> cirurgias, List<Consulta> consultas)
+        public Medico(string nome, string telefone, string cRM)
         {
             Nome = nome;
             Telefone = telefone;
-            Disponivel = disponivel;
             CRM = cRM;
-            Cirurgias = cirurgias;
-            Consultas = consultas;
         }
 
         public override void Atualizar(Medico registro)
         {
             Nome = registro.Nome;
             Telefone = registro.Telefone;
-            Disponivel = registro.Disponivel;
             CRM = registro.CRM;
         }
     }

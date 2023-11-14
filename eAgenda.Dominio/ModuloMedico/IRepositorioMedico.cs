@@ -1,13 +1,9 @@
 ﻿using eAgenda.Dominio.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace eAgenda.Dominio.ModuloMedico
 {
     public interface IRepositorioMedico : IRepositorio<Medico>
     {
+        List<Medico> SelecionarMuitos(List<Guid> idsCategoriasSelecionadas);
     }
 }

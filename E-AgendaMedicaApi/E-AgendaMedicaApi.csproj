@@ -16,13 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-    <Folder Include="ViewModels\" />
+    <ProjectReference Include="..\eAgenda.Dominio\eAgenda.Dominio.csproj" />
+    <ProjectReference Include="..\eAgenda.Infra.Orm\eAgenda.Infra.Orm.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eAgenda.Dominio\eAgenda.Dominio.csproj" />
-    <ProjectReference Include="..\eAgenda.Infra.Orm\eAgenda.Infra.Orm.csproj" />
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>

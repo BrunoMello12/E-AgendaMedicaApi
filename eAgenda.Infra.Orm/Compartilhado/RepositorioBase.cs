@@ -46,6 +46,14 @@ namespace eAgenda.Infra.Orm.Compartilhado
             return true;
         }
 
+        public virtual async Task<bool> ExcluirAsync(TEntity registro)
+        {
+            if (registro == null)
+                return false;
+
+            return await ExcluirAsync(registro.Id);
+        }
+
         public virtual async Task<TEntity> SelecionarPorIdAsync(Guid id)
         {
             return await registros
