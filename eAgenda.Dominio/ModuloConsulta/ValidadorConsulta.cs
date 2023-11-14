@@ -15,7 +15,7 @@ namespace eAgenda.Dominio.ModuloConsulta
             RuleFor(x => x.HoraTermino)
                 .NotEmpty();
 
-            RuleFor(x => x.Medico)
+            RuleFor(x => x.MedicoId)
                 .NotNull().WithMessage("A consulta deve ter um médico.");
         }
     }

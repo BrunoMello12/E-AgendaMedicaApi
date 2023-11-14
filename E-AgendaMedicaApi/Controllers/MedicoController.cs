@@ -22,7 +22,7 @@ namespace E_AgendaMedicaApi.Controllers
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(ListarConsultaViewModel), 200)]
+        [ProducesResponseType(typeof(ListarMedicoViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarTodos()
         {

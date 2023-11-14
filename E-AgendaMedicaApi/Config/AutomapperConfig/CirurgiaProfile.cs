@@ -12,15 +12,21 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
             CreateMap<Cirurgia, ListarCirurgiaViewModel>();
 
             CreateMap<Cirurgia, VisualizarCirurgiaViewModel>()
+                .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
+                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
                 .ForMember(destino => destino.Medicos, opt => opt.Ignore());
 
             CreateMap<FormsCirurgiaViewModel, Cirurgia>()
-                .ForMember(destino => destino.Medicos, opt => opt.Ignore())
-                .AfterMap<InserirMedicosMappingAction>();
+                .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
+                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
+                .ForMember(destino => destino.Medicos, opt => opt.Ignore());
+                //.AfterMap<InserirMedicosMappingAction>();
 
-            CreateMap<FormsCirurgiaViewModel, Cirurgia>()
-                .ForMember(destino => destino.Medicos, opt => opt.Ignore())
-                .AfterMap(EditarMedicosMappingAction);
+            //CreateMap<FormsCirurgiaViewModel, Cirurgia>()
+            //    .ForMember(destino => destino.Medicos, opt => opt.Ignore())
+            //    .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
+            //    .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
+            //    .AfterMap(EditarMedicosMappingAction);
 
         }
 

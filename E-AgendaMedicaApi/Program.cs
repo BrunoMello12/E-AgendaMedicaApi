@@ -1,6 +1,8 @@
 using E_AgendaMedicaApi.Config;
 using E_AgendaMedicaApi.Config.AutomapperConfig;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Any;
+using Microsoft.OpenApi.Models;
 
 namespace E_AgendaMedicaApi
 {
@@ -14,6 +16,15 @@ namespace E_AgendaMedicaApi
             builder.Services.Configure<ApiBehaviorOptions>(config =>
             {
                 config.SuppressModelStateInvalidFilter = true;
+            });
+
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.MapType<TimeSpan>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Example = new OpenApiString("00:00:00")
+                });
             });
 
             builder.Services.ConfigurarSerilog(builder.Logging);

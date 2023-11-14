@@ -1,6 +1,4 @@
-﻿using eAgenda.Dominio.ModuloMedico;
-
-namespace E_AgendaMedicaApi.ViewModels.ModuloCirurgia
+﻿namespace E_AgendaMedicaApi.ViewModels.ModuloCirurgia
 {
     public class FormsCirurgiaViewModel
     {
