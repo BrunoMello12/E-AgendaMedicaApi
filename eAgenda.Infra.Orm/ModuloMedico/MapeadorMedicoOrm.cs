@@ -19,11 +19,6 @@ namespace eAgenda.Infra.Orm.ModuloMedico
             builder.HasMany(x => x.Cirurgias)
                  .WithMany(x => x.Medicos)
                  .UsingEntity(j => j.ToTable("TBMedicoCirurgia"));
-
-            //builder.HasMany(x => x.Consultas)
-            //    .WithOne()
-            //    .IsRequired(false)
-            //    .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

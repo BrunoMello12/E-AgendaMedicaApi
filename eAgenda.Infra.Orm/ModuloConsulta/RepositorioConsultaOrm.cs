@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace eAgenda.Infra.Orm.ModuloConsulta
 {
-    public class RepositorioConsultaOrm : RepositorioBase<Consulta>
+    public class RepositorioConsultaOrm : RepositorioBase<Consulta>, IRepositorioConsulta
     {
         public RepositorioConsultaOrm(IContextoPersistencia contextoPersistencia) : base(contextoPersistencia)
         {

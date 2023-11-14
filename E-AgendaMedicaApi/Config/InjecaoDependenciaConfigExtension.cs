@@ -1,5 +1,15 @@
-﻿using eAgenda.Dominio.Compartilhado;
+﻿using E_AgendaMedicaApi.Config.AutomapperConfig;
+using eAgenda.Aplicacao.ModuloCirurgia;
+using eAgenda.Aplicacao.ModuloConsulta;
+using eAgenda.Aplicacao.ModuloMedico;
+using eAgenda.Dominio.Compartilhado;
+using eAgenda.Dominio.ModuloCirurgia;
+using eAgenda.Dominio.ModuloConsulta;
+using eAgenda.Dominio.ModuloMedico;
 using eAgenda.Infra.Orm.Compartilhado;
+using eAgenda.Infra.Orm.ModuloCirurgia;
+using eAgenda.Infra.Orm.ModuloConsulta;
+using eAgenda.Infra.Orm.ModuloMedico;
 using Microsoft.EntityFrameworkCore;
 
 namespace E_AgendaMedicaApi.Config
@@ -15,7 +25,17 @@ namespace E_AgendaMedicaApi.Config
                 optionsBuilder.UseSqlServer(connectionString);
             });
 
-            
+            services.AddTransient<IRepositorioCirurgia, RepositorioCirurgiaOrm>();
+            services.AddTransient<ServicoCirurgia>();
+
+            services.AddScoped<IRepositorioConsulta, RepositorioConsultaOrm>();
+            services.AddTransient<ServicoConsulta>();
+
+            services.AddScoped<IRepositorioMedico, RepositorioMedicoOrm>();
+            services.AddTransient<ServicoMedico>();
+
+            services.AddTransient<InserirMedicosMappingAction>();
+
         }
     }
 }

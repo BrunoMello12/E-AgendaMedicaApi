@@ -12,8 +12,8 @@ using eAgenda.Infra.Orm.Compartilhado;
 namespace eAgenda.Infra.Orm.Migrations
 {
     [DbContext(typeof(eAgendaDbContext))]
-    [Migration("20231113204750_primeiraMigration")]
-    partial class primeiraMigration
+    [Migration("20231114142256_PrimeiraMigration")]
+    partial class PrimeiraMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
