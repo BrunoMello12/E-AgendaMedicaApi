@@ -34,7 +34,7 @@ namespace E_AgendaMedicaApi.Config
             services.AddScoped<IRepositorioMedico, RepositorioMedicoOrm>();
             services.AddTransient<ServicoMedico>();
 
-            services.AddTransient<InserirMedicosMappingAction>();
+            services.AddTransient<FormsCirurgiaMappingAction>();
 
         }
     }

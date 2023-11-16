@@ -19,35 +19,23 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
             CreateMap<FormsCirurgiaViewModel, Cirurgia>()
                 .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
                 .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
-                .ForMember(destino => destino.Medicos, opt => opt.Ignore());
-                //.AfterMap<InserirMedicosMappingAction>();
-
-            //CreateMap<FormsCirurgiaViewModel, Cirurgia>()
-            //    .ForMember(destino => destino.Medicos, opt => opt.Ignore())
-            //    .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
-            //    .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
-            //    .AfterMap(EditarMedicosMappingAction);
-
-        }
-
-        private void EditarMedicosMappingAction(FormsCirurgiaViewModel viewModel, Cirurgia cirurgia)
-        {
-            viewModel.Medicos = cirurgia.Medicos.Select(medico => medico.Id).ToList();
+                .ForMember(destino => destino.Medicos, opt => opt.Ignore())
+                .AfterMap<FormsCirurgiaMappingAction>();
         }
     }
 
-    public class InserirMedicosMappingAction : IMappingAction<FormsCirurgiaViewModel, Cirurgia>
+    public class FormsCirurgiaMappingAction : IMappingAction<FormsCirurgiaViewModel, Cirurgia>
     {
         private readonly IRepositorioMedico repositorioMedico;
 
-        public InserirMedicosMappingAction(IRepositorioMedico repositorioMedico)
+        public FormsCirurgiaMappingAction(IRepositorioMedico repositorioMedico)
         {
             this.repositorioMedico = repositorioMedico;
         }
 
         public void Process(FormsCirurgiaViewModel source, Cirurgia destination, ResolutionContext context)
         {
-            destination.Medicos = repositorioMedico.SelecionarMuitos(source.Medicos);
+            destination.Medicos = repositorioMedico.SelecionarMuitos(source.MedicosSelecionados);
         }
     }
 }
