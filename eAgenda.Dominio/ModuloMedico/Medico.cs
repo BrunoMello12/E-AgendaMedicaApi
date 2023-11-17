@@ -15,7 +15,7 @@ namespace eAgenda.Dominio.ModuloMedico
 
         public Medico()
         {
-            
+
         }
 
         public Medico(string nome, string telefone, string cRM)
@@ -23,7 +23,6 @@ namespace eAgenda.Dominio.ModuloMedico
             Nome = nome;
             Telefone = telefone;
             CRM = cRM;
-            Disponivel = true;
         }
 
         public override void Atualizar(Medico registro)

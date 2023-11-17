@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace eAgenda.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class PrimeiraMigration : Migration
+    public partial class minhaMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,7 +32,7 @@ namespace eAgenda.Infra.Orm.Migrations
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Nome = table.Column<string>(type: "varchar(300)", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Disponivel = table.Column<bool>(type: "bit", nullable: false),
+                    Disponivel = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
                     CRM = table.Column<string>(type: "varchar(20)", nullable: false)
                 },
                 constraints: table =>

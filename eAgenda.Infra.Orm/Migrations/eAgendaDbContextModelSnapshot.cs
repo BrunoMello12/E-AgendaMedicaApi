@@ -92,7 +92,9 @@ namespace eAgenda.Infra.Orm.Migrations
                         .HasColumnType("varchar(20)");
 
                     b.Property<bool>("Disponivel")
-                        .HasColumnType("bit");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bit")
+                        .HasDefaultValue(true);
 
                     b.Property<string>("Nome")
                         .IsRequired()
