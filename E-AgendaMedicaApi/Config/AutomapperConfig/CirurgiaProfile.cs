@@ -9,12 +9,13 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
     {
         public CirurgiaProfile()
         {
-            CreateMap<Cirurgia, ListarCirurgiaViewModel>();
+            CreateMap<Cirurgia, ListarCirurgiaViewModel>()
+            .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
+            .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm"))); 
 
             CreateMap<Cirurgia, VisualizarCirurgiaViewModel>()
                 .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
-                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
-                .ForMember(destino => destino.Medicos, opt => opt.Ignore());
+                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")));
 
             CreateMap<FormsCirurgiaViewModel, Cirurgia>()
                 .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
@@ -23,6 +24,7 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
                 .AfterMap<FormsCirurgiaMappingAction>();
         }
     }
+
 
     public class FormsCirurgiaMappingAction : IMappingAction<FormsCirurgiaViewModel, Cirurgia>
     {
@@ -35,7 +37,7 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
 
         public void Process(FormsCirurgiaViewModel source, Cirurgia destination, ResolutionContext context)
         {
-            destination.Medicos = repositorioMedico.SelecionarMuitos(source.MedicosSelecionados);
+            destination.Medicos.AddRange(repositorioMedico.SelecionarMuitos(source.MedicosSelecionados));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace eAgenda.Dominio.ModuloCirurgia
 
         public Cirurgia()
         {
-            
+            Medicos = new List<Medico>();
         }
 
         public Cirurgia(string titulo, TimeSpan horaInicio, TimeSpan horaTermino, List<Medico> medicos)
@@ -20,7 +20,6 @@ namespace eAgenda.Dominio.ModuloCirurgia
             Titulo = titulo;
             HoraInicio = horaInicio;
             HoraTermino = horaTermino;
-            Medicos = medicos;
         }
 
         public override void Atualizar(Cirurgia registro)

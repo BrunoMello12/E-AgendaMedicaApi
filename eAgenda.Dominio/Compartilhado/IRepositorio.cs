@@ -3,8 +3,8 @@
     public interface IRepositorio<T> where T : EntidadeBase<T>
     {
         Task<bool> InserirAsync(T novoRegistro);
-        Task<bool> EditarAsync(T registroExistente);
-        Task<bool> ExcluirAsync(T registroExistente);
+        void Editar(T registroExistente);
+        void Excluir(T registroExistente);
         Task<List<T>> SelecionarTodosAsync();
         Task<T> SelecionarPorIdAsync(Guid numero);
     }

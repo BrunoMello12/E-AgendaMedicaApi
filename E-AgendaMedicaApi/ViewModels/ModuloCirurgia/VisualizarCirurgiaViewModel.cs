@@ -1,4 +1,5 @@
-﻿using eAgenda.Dominio.ModuloMedico;
+﻿using E_AgendaMedicaApi.ViewModels.ModuloMedico;
+using eAgenda.Dominio.ModuloMedico;
 
 namespace E_AgendaMedicaApi.ViewModels.ModuloCirurgia
 {
@@ -8,6 +9,11 @@ namespace E_AgendaMedicaApi.ViewModels.ModuloCirurgia
         public string Titulo { get; set; }
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraTermino { get; set; }
-        public List<string> Medicos { get; set; }
+        public List<ListarMedicoViewModel> Medicos { get; set; }
+
+        public VisualizarCirurgiaViewModel()
+        {
+            Medicos = new List<ListarMedicoViewModel>();
+        }
     }
 }

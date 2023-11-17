@@ -39,7 +39,7 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
             if (resultado.IsFailed)
                 return Result.Fail(resultado.Errors);
 
-            await repositorioCirurgia.EditarAsync(cirurgia);
+            repositorioCirurgia.Editar(cirurgia);
 
             await contextoPersistencia.GravarDadosAsync();
 
@@ -58,7 +58,7 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
 
         public async Task<Result> ExcluirAsync(Cirurgia cirurgia)
         {
-            await repositorioCirurgia.ExcluirAsync(cirurgia);
+            repositorioCirurgia.Excluir(cirurgia);
 
             await contextoPersistencia.GravarDadosAsync();
 

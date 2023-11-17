@@ -20,38 +20,14 @@ namespace eAgenda.Infra.Orm.Compartilhado
             return true;
         }
 
-        public virtual async Task<bool> EditarAsync(TEntity registroAtualizado)
+        public virtual void Editar(TEntity registro)
         {
-            var registroExistente = await registros.SingleOrDefaultAsync(x => x.Id == registroAtualizado.Id);
-
-            if (registroExistente == null)
-                return false;
-
-            dbContext.Entry(registroExistente).CurrentValues.SetValues(registroAtualizado);
-            await dbContext.SaveChangesAsync();
-
-            return true;
+            registros.Update(registro);
         }
 
-        public virtual async Task<bool> ExcluirAsync(Guid id)
+        public virtual void Excluir(TEntity registro)
         {
-            var registroParaExcluir = await registros.SingleOrDefaultAsync(x => x.Id == id);
-
-            if (registroParaExcluir == null)
-                return false;
-
-            registros.Remove(registroParaExcluir);
-            await dbContext.SaveChangesAsync();
-
-            return true;
-        }
-
-        public virtual async Task<bool> ExcluirAsync(TEntity registro)
-        {
-            if (registro == null)
-                return false;
-
-            return await ExcluirAsync(registro.Id);
+            registros.Remove(registro);
         }
 
         public virtual async Task<TEntity> SelecionarPorIdAsync(Guid id)

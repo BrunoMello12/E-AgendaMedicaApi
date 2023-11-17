@@ -31,6 +31,10 @@ namespace E_AgendaMedicaApi
             builder.Services.ConfigurarAutoMapper();
             builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
             builder.Services.ConfigurarSwagger();
+            builder.Services.AddCors(opt =>
+            {
+                opt.AddPolicy("Desenvolvimento", servicos => servicos.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
 
             builder.Services.ConfigurarControllers();
 
@@ -43,12 +47,14 @@ namespace E_AgendaMedicaApi
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                
             }
+
+            app.UseCors("Desenvolvimento");
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 

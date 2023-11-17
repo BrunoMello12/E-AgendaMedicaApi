@@ -39,7 +39,7 @@ namespace eAgenda.Aplicacao.ModuloConsulta
             if (resultado.IsFailed)
                 return Result.Fail(resultado.Errors);
 
-            await repositorioConsulta.EditarAsync(consulta);
+            repositorioConsulta.Editar(consulta);
 
             await contextoPersistencia.GravarDadosAsync();
 
@@ -58,7 +58,7 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
         public async Task<Result> ExcluirAsync(Consulta consulta)
         {
-            await repositorioConsulta.ExcluirAsync(consulta);
+            repositorioConsulta.Excluir(consulta);
 
             await contextoPersistencia.GravarDadosAsync();
 

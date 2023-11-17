@@ -1,11 +1,7 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloConsulta;
 using eAgenda.Infra.Orm.Compartilhado;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace eAgenda.Infra.Orm.ModuloConsulta
 {
@@ -13,6 +9,17 @@ namespace eAgenda.Infra.Orm.ModuloConsulta
     {
         public RepositorioConsultaOrm(IContextoPersistencia contextoPersistencia) : base(contextoPersistencia)
         {
+        }
+
+        public override async Task<Consulta> SelecionarPorIdAsync(Guid id)
+        {
+            return await registros.Include(x => x.Medico)
+                .SingleOrDefaultAsync(x => x.Id == id);
+        }
+
+        public override async Task<List<Consulta>> SelecionarTodosAsync()
+        {
+            return await registros.Include(x => x.Medico).ToListAsync();
         }
     }
 }
