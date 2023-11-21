@@ -15,7 +15,7 @@ namespace E_AgendaMedicaApi
             // Add services to the container.
             builder.Services.Configure<ApiBehaviorOptions>(config =>
             {
-                config.SuppressModelStateInvalidFilter = true;
+                config.SuppressModelStateInvalidFilter = false;
             });
 
             builder.Services.AddSwaggerGen(c =>

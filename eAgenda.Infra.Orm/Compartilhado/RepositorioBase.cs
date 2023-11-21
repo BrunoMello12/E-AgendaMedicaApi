@@ -36,6 +36,12 @@ namespace eAgenda.Infra.Orm.Compartilhado
                 .SingleOrDefaultAsync(x => x.Id == id);
         }
 
+        public virtual TEntity SelecionarPorId(Guid id)
+        {
+            return registros
+                .SingleOrDefault(x => x.Id == id);
+        }
+
         public virtual async Task<List<TEntity>> SelecionarTodosAsync()
         {
             return await registros.ToListAsync();

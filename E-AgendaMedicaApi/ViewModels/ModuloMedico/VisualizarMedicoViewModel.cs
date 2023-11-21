@@ -1,4 +1,6 @@
-﻿namespace E_AgendaMedicaApi.ViewModels.ModuloMedico
+﻿using eAgenda.Dominio.ModuloCirurgia;
+
+namespace E_AgendaMedicaApi.ViewModels.ModuloMedico
 {
     public class VisualizarMedicoViewModel
     {
@@ -7,5 +9,6 @@
         public string Telefone { get; set; }
         public bool Disponivel { get; set; }
         public string CRM { get; private set; }
+        
     }
 }

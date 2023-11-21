@@ -100,6 +100,9 @@ namespace eAgenda.Infra.Orm.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(300)");
 
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("varchar(20)");

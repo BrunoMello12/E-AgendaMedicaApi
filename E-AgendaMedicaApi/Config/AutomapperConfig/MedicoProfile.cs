@@ -11,6 +11,8 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
             CreateMap<Medico, ListarMedicoViewModel>();
             CreateMap<Medico, VisualizarMedicoViewModel>();
             CreateMap<FormsMedicoViewModel, Medico>();
+            CreateMap<ListarMedicoViewModel, Medico>();
+            CreateMap<Medico, ListarMedicoViewModel>();
         }
     }
 }

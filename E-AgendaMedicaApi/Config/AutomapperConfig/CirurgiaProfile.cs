@@ -26,13 +26,11 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
             CreateMap<Cirurgia, FormsCirurgiaViewModel>()
                 .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
                 .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
-                .ForMember(destino => destino.MedicosSelecionados, opt => opt.Ignore())
-                .AfterMap<FormsCirurgiaMappingActionInverso>();
+                .ForMember(destino => destino.MedicosSelecionados, opt => opt.MapFrom(origem => origem.Medicos));
         }
     }
 
-
-    public class FormsCirurgiaMappingAction : IMappingAction<FormsCirurgiaViewModel, Cirurgia>
+    public class FormsCirurgiaMappingAction : IMappingAction<FormsCirurgiaViewModel,Cirurgia>
     {
         private readonly IRepositorioMedico repositorioMedico;
 
@@ -41,24 +39,20 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
             this.repositorioMedico = repositorioMedico;
         }
 
-        public void Process(FormsCirurgiaViewModel source, Cirurgia destination, ResolutionContext context)
+        public void Process( FormsCirurgiaViewModel viewModel, Cirurgia cirurgia, ResolutionContext context)
         {
-            destination.Medicos.AddRange(repositorioMedico.SelecionarMuitos(source.MedicosSelecionados));
-        }
-    }
-
-    public class FormsCirurgiaMappingActionInverso : IMappingAction<Cirurgia, FormsCirurgiaViewModel>
-    {
-        private readonly IRepositorioMedico repositorioMedico;
-
-        public FormsCirurgiaMappingActionInverso(IRepositorioMedico repositorioMedico)
-        {
-            this.repositorioMedico = repositorioMedico;
-        }
-
-        public void Process(Cirurgia destination, FormsCirurgiaViewModel source, ResolutionContext context)
-        {
-            source.MedicosSelecionados.AddRange(repositorioMedico.SelecionarMuitos(destination.Medicos));
+            foreach (var medicoVM in viewModel.MedicosSelecionados)
+            {
+                if (medicoVM.Status == StatusMedicoCirurgia.Adicionado)
+                {
+                    var medico = repositorioMedico.SelecionarPorId(medicoVM.Id);
+                    cirurgia.AdicionarMedico(medico);
+                }
+                else if (medicoVM.Status == StatusMedicoCirurgia.Removido)
+                {
+                    cirurgia.RemoverMedico(medicoVM.Id);
+                }
+            }
         }
     }
 }
