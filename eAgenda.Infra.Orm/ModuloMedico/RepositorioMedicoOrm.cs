@@ -15,5 +15,10 @@ namespace eAgenda.Infra.Orm.ModuloMedico
         {
             return registros.Where(medico => idsMedicosSelecionados.Contains(medico.Id)).ToList();
         }
+
+        public List<Guid> SelecionarMuitos(List<Medico> medicos)
+        {
+            return medicos.Select(medico => medico.Id).ToList();
+        }
     }
 }

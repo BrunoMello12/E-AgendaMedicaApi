@@ -32,8 +32,25 @@ namespace E_AgendaMedicaApi.Controllers
             return Ok(viewModel);
         }
 
+
         [HttpGet("visualizacao-completa/{id}")]
         [ProducesResponseType(typeof(VisualizarCirurgiaViewModel), 200)]
+        [ProducesResponseType(typeof(string[]), 404)]
+        [ProducesResponseType(typeof(string[]), 500)]
+        public async Task<IActionResult> SelecionarCompletoPorId(Guid id)
+        {
+            var cirurgiaResult = await servicoCirurgia.SelecionarPorIdAsync(id);
+
+            if (cirurgiaResult.IsFailed)
+                return NotFound(cirurgiaResult.Errors);
+
+            var viewModel = mapeador.Map<VisualizarCirurgiaViewModel>(cirurgiaResult.Value);
+
+            return Ok(viewModel);
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FormsCirurgiaViewModel), 200)]
         [ProducesResponseType(typeof(string[]), 404)]
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> SelecionarPorId(Guid id)
@@ -43,7 +60,7 @@ namespace E_AgendaMedicaApi.Controllers
             if (cirurgiaResult.IsFailed)
                 return NotFound(cirurgiaResult.Errors);
 
-            var viewModel = mapeador.Map<VisualizarCirurgiaViewModel>(cirurgiaResult.Value);
+            var viewModel = mapeador.Map<FormsCirurgiaViewModel>(cirurgiaResult.Value);
 
             return Ok(viewModel);
         }

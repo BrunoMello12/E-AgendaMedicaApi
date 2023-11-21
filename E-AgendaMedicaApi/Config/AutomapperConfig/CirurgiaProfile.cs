@@ -22,6 +22,12 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
                 .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
                 .ForMember(destino => destino.Medicos, opt => opt.Ignore())
                 .AfterMap<FormsCirurgiaMappingAction>();
+
+            CreateMap<Cirurgia, FormsCirurgiaViewModel>()
+                .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
+                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
+                .ForMember(destino => destino.MedicosSelecionados, opt => opt.Ignore())
+                .AfterMap<FormsCirurgiaMappingActionInverso>();
         }
     }
 
@@ -38,6 +44,21 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
         public void Process(FormsCirurgiaViewModel source, Cirurgia destination, ResolutionContext context)
         {
             destination.Medicos.AddRange(repositorioMedico.SelecionarMuitos(source.MedicosSelecionados));
+        }
+    }
+
+    public class FormsCirurgiaMappingActionInverso : IMappingAction<Cirurgia, FormsCirurgiaViewModel>
+    {
+        private readonly IRepositorioMedico repositorioMedico;
+
+        public FormsCirurgiaMappingActionInverso(IRepositorioMedico repositorioMedico)
+        {
+            this.repositorioMedico = repositorioMedico;
+        }
+
+        public void Process(Cirurgia destination, FormsCirurgiaViewModel source, ResolutionContext context)
+        {
+            source.MedicosSelecionados.AddRange(repositorioMedico.SelecionarMuitos(destination.Medicos));
         }
     }
 }
