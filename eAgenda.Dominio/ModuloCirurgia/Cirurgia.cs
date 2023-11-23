@@ -22,28 +22,6 @@ namespace eAgenda.Dominio.ModuloCirurgia
             HoraTermino = horaTermino;
         }
 
-        public bool AdicionarMedico(Medico medico)
-        {
-            if (Medicos.Exists(x => x.Equals(medico)) == false)
-            {
-                medico.Cirurgias.Add(this);
-                Medicos.Add(medico);
-
-                return true;
-            }
-
-            return false;
-        }
-
-        public void RemoverMedico(Guid medicoId)
-        {
-            var medicoCirurgia = Medicos.Find(x => x.Id.Equals(medicoId));
-
-            Medicos.Remove(medicoCirurgia);
-        }
-
-
-
         public override void Atualizar(Cirurgia registro)
         {
             Titulo = registro.Titulo;

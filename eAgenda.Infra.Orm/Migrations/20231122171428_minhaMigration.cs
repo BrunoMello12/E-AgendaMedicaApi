@@ -33,8 +33,7 @@ namespace eAgenda.Infra.Orm.Migrations
                     Nome = table.Column<string>(type: "varchar(300)", nullable: false),
                     Telefone = table.Column<string>(type: "varchar(20)", nullable: false),
                     Disponivel = table.Column<bool>(type: "bit", nullable: false, defaultValue: true),
-                    CRM = table.Column<string>(type: "varchar(20)", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false)
+                    CRM = table.Column<string>(type: "varchar(20)", nullable: false)
                 },
                 constraints: table =>
                 {

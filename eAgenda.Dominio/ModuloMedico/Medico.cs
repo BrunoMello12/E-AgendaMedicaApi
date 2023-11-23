@@ -10,13 +10,13 @@ namespace eAgenda.Dominio.ModuloMedico
         public string Telefone { get; set; }
         public bool Disponivel { get; set; }
         public string CRM { get; private set; }
-        public StatusMedicoCirurgia Status { get; set; }
         public List<Cirurgia> Cirurgias { get; set; }
         public List<Consulta> Consultas { get; set; }
 
         public Medico()
         {
             Cirurgias = new List<Cirurgia>();
+            Consultas = new List<Consulta>();
         }
 
         public Medico(string nome, string telefone, string cRM) : this()

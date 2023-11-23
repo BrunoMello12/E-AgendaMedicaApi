@@ -12,7 +12,7 @@ using eAgenda.Infra.Orm.Compartilhado;
 namespace eAgenda.Infra.Orm.Migrations
 {
     [DbContext(typeof(eAgendaDbContext))]
-    [Migration("20231121203821_minhaMigration")]
+    [Migration("20231122171428_minhaMigration")]
     partial class minhaMigration
     {
         /// <inheritdoc />
@@ -102,9 +102,6 @@ namespace eAgenda.Infra.Orm.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("varchar(300)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<string>("Telefone")
                         .IsRequired()
