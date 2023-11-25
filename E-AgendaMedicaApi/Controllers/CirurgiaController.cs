@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using E_AgendaMedicaApi.Controllers.Shared;
 using E_AgendaMedicaApi.ViewModels.ModuloCirurgia;
+using E_AgendaMedicaApi.ViewModels.ModuloMedico;
 using eAgenda.Aplicacao.ModuloCirurgia;
 using eAgenda.Dominio.ModuloCirurgia;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +29,22 @@ namespace E_AgendaMedicaApi.Controllers
             var cirurgiaResult = await servicoCirurgia.SelecionarTodosAsync();
 
             var viewModel = mapeador.Map<List<ListarCirurgiaViewModel>>(cirurgiaResult.Value);
+
+            return Ok(viewModel);
+        }
+
+        [HttpGet("medicos/{id}")]
+        [ProducesResponseType(typeof(ListarMedicoViewModel), 200)]
+        [ProducesResponseType(typeof(string[]), 404)]
+        [ProducesResponseType(typeof(string[]), 500)]
+        public async Task<IActionResult> SelecionarTodosMedicosCirurgia(Guid id)
+        {
+            var cirurgiaResult = await servicoCirurgia.SelecionarPorIdAsync(id);
+
+            if (cirurgiaResult.IsFailed)
+                return NotFound(cirurgiaResult.Errors);
+
+            var viewModel = mapeador.Map<List<ListarMedicoViewModel>>(cirurgiaResult.Value.Medicos);
 
             return Ok(viewModel);
         }

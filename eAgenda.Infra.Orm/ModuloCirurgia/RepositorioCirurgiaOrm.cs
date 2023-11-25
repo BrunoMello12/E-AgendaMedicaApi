@@ -1,5 +1,7 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloCirurgia;
+using eAgenda.Dominio.ModuloConsulta;
+using eAgenda.Dominio.ModuloMedico;
 using eAgenda.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +11,11 @@ namespace eAgenda.Infra.Orm.ModuloCirurgia
     {
         public RepositorioCirurgiaOrm(IContextoPersistencia contextoPersistencia) : base(contextoPersistencia)
         {
+        }
+
+        public async Task<List<Cirurgia>> SelecionarCirurgiasMedico(Guid id)
+        {
+            return await registros.Where(cirurgia => cirurgia.Medicos.Any(medico => medico.Id == id)).ToListAsync();
         }
 
         public override async Task<Cirurgia> SelecionarPorIdAsync(Guid id)

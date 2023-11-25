@@ -1,5 +1,6 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloCirurgia;
+using eAgenda.Dominio.ModuloMedico;
 using FluentResults;
 using Serilog;
 

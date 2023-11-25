@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using E_AgendaMedicaApi.Controllers.Shared;
+using E_AgendaMedicaApi.ViewModels.ModuloCirurgia;
 using E_AgendaMedicaApi.ViewModels.ModuloConsulta;
 using E_AgendaMedicaApi.ViewModels.ModuloMedico;
 using eAgenda.Aplicacao.ModuloMedico;
@@ -49,6 +50,39 @@ namespace E_AgendaMedicaApi.Controllers
             return Ok(viewModel);
         }
 
+        [HttpGet("visualizar-medico-consultas/{id}")]
+        [ProducesResponseType(typeof(List<ListarConsultaViewModel>), 200)]
+        [ProducesResponseType(typeof(string[]), 404)]
+        [ProducesResponseType(typeof(string[]), 500)]
+        public async Task<IActionResult> SelecionarConsultasMedico(Guid id)
+        {
+            var consultasResult = await servicoMedico.SelecionarConsultasMedicoAsync(id);
+
+            if (consultasResult.IsFailed)
+                return NotFound(consultasResult.Errors);
+
+            var viewModel = mapeador.Map<List<ListarConsultaViewModel>>(consultasResult.Value);
+
+            return Ok(viewModel);
+        }
+
+        [HttpGet("visualizar-medico-cirurgias/{id}")]
+        [ProducesResponseType(typeof(List<ListarCirurgiaViewModel>), 200)]
+        [ProducesResponseType(typeof(string[]), 404)]
+        [ProducesResponseType(typeof(string[]), 500)]
+        public async Task<IActionResult> SelecionarCirurgiasMedico(Guid id)
+        {
+            var cirurgiasResult = await servicoMedico.SelecionarCirurgiasMedicoAsync(id);
+
+            if (cirurgiasResult.IsFailed)
+                return NotFound(cirurgiasResult.Errors);
+
+            var viewModel = mapeador.Map<List<ListarCirurgiaViewModel>>(cirurgiasResult.Value);
+
+            return Ok(viewModel);
+        }
+
+
         [HttpPost]
         [ProducesResponseType(typeof(FormsMedicoViewModel), 201)]
         [ProducesResponseType(typeof(string[]), 400)]
@@ -58,6 +92,9 @@ namespace E_AgendaMedicaApi.Controllers
             var medico = mapeador.Map<Medico>(medicoViewModel);
 
             var medicoResult = await servicoMedico.InserirAsync(medico);
+
+            if (medicoResult.IsFailed)
+                return NotFound(medicoResult.Errors);
 
             return ProcessarResultado(medicoResult.ToResult(), medicoViewModel);
         }

@@ -17,6 +17,7 @@ namespace eAgenda.Infra.Orm.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(300)", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HoraInicio = table.Column<TimeSpan>(type: "time", nullable: false),
                     HoraTermino = table.Column<TimeSpan>(type: "time", nullable: false)
                 },
@@ -46,6 +47,7 @@ namespace eAgenda.Infra.Orm.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Titulo = table.Column<string>(type: "varchar(300)", nullable: false),
+                    Data = table.Column<DateTime>(type: "datetime2", nullable: false),
                     HoraInicio = table.Column<TimeSpan>(type: "time", nullable: false),
                     HoraTermino = table.Column<TimeSpan>(type: "time", nullable: false),
                     MedicoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)

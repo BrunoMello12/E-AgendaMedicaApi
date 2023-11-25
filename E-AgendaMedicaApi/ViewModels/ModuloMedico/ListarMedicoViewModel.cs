@@ -7,6 +7,7 @@ namespace E_AgendaMedicaApi.ViewModels.ModuloMedico
         public Guid Id { get; set; }
         public string Nome { get; set; }
         public string Telefone { get; set; }
+        public string CRM { get; set; }
         public bool Disponivel { get; set; }
     }
 }

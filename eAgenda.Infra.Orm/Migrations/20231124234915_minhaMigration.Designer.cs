@@ -12,7 +12,7 @@ using eAgenda.Infra.Orm.Compartilhado;
 namespace eAgenda.Infra.Orm.Migrations
 {
     [DbContext(typeof(eAgendaDbContext))]
-    [Migration("20231122171428_minhaMigration")]
+    [Migration("20231124234915_minhaMigration")]
     partial class minhaMigration
     {
         /// <inheritdoc />
@@ -45,6 +45,9 @@ namespace eAgenda.Infra.Orm.Migrations
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
                     b.Property<TimeSpan>("HoraInicio")
                         .HasColumnType("time");
 
@@ -64,6 +67,9 @@ namespace eAgenda.Infra.Orm.Migrations
                 {
                     b.Property<Guid>("Id")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
 
                     b.Property<TimeSpan>("HoraInicio")
                         .HasColumnType("time");

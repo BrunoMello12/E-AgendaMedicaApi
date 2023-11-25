@@ -1,5 +1,6 @@
 using E_AgendaMedicaApi.Config;
 using E_AgendaMedicaApi.Config.AutomapperConfig;
+using E_AgendaMedicaApi.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
@@ -25,6 +26,8 @@ namespace E_AgendaMedicaApi
                     Type = "string",
                     Example = new OpenApiString("00:00:00")
                 });
+
+                c.DocumentFilter<CustomSwaggerDateFormatFilter>();
             });
 
             builder.Services.ConfigurarSerilog(builder.Logging);
