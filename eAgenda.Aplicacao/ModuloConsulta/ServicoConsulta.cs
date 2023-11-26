@@ -1,4 +1,5 @@
 ﻿using eAgenda.Dominio.Compartilhado;
+using eAgenda.Dominio.ModuloCirurgia;
 using eAgenda.Dominio.ModuloConsulta;
 using FluentResults;
 using Serilog;
@@ -8,18 +9,32 @@ namespace eAgenda.Aplicacao.ModuloConsulta
     public class ServicoConsulta : ServicoBase<Consulta, ValidadorConsulta>
     {
         private IRepositorioConsulta repositorioConsulta;
+        private IRepositorioCirurgia repositorioCirurgia;
         private IContextoPersistencia contextoPersistencia;
 
         public ServicoConsulta(
             IRepositorioConsulta repositorioConsulta,
+            IRepositorioCirurgia repositorioCirurgia,
             IContextoPersistencia contexto)
         {
             this.repositorioConsulta = repositorioConsulta;
+            this.repositorioCirurgia = repositorioCirurgia;
             this.contextoPersistencia = contexto;
         }
 
         public async Task<Result<Consulta>> InserirAsync(Consulta consulta)
         {
+            TimeSpan periodoDescanso = TimeSpan.FromMinutes(20);
+
+            consulta.HoraTermino += periodoDescanso;
+
+            var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+
+            var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+
+            if (JaExisteConsulta || JaExisteCirurgia)
+                return Result.Fail("Horário indísponivel");
+
             Result resultado = Validar(consulta);
 
             if (resultado.IsFailed)
@@ -34,6 +49,23 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> EditarAsync(Consulta consulta)
         {
+            //TimeSpan periodoDescanso = TimeSpan.FromMinutes(20);
+
+            //consulta.HoraTermino += periodoDescanso;
+
+            //var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+
+            //var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+
+            //foreach (var c in await repositorioConsulta.SelecionarTodosAsync())
+            //{
+            //    if (consulta.Id != c.Id)
+            //    {
+            //        if (JaExisteConsulta || JaExisteCirurgia)
+            //            return Result.Fail("Horário indísponivel");
+            //    }
+            //}
+
             var resultado = Validar(consulta);
 
             if (resultado.IsFailed)

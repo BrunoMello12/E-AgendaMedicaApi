@@ -50,6 +50,7 @@ namespace E_AgendaMedicaApi.Controllers
             return Ok(viewModel);
         }
 
+
         [HttpGet("visualizar-medico-consultas/{id}")]
         [ProducesResponseType(typeof(List<ListarConsultaViewModel>), 200)]
         [ProducesResponseType(typeof(string[]), 404)]

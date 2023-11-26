@@ -11,6 +11,15 @@ namespace eAgenda.Infra.Orm.ModuloConsulta
         {
         }
 
+        public async Task<bool> ExisteConsultaNesseHorarioPorMedicoId(Guid medicoId, TimeSpan horaInicio, TimeSpan horaTermino, DateTime data)
+        {
+            return await registros.AnyAsync(x => x.MedicoId == medicoId &&
+            (((horaInicio >= x.HoraInicio && horaInicio <= x.HoraTermino) ||
+                (horaTermino >= x.HoraInicio && horaTermino <= x.HoraTermino)) ||
+                (x.HoraInicio >= horaInicio && x.HoraTermino <= horaTermino)
+                 && data.Date == x.Data.Date));
+        }
+
         public async Task<List<Consulta>> SelecionarConsultasMedico(Guid id)
         {
             return await registros.Where(x => x.Medico.Id == id).ToListAsync();

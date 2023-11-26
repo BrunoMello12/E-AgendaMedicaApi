@@ -1,6 +1,6 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloCirurgia;
-using eAgenda.Dominio.ModuloMedico;
+using eAgenda.Dominio.ModuloConsulta;
 using FluentResults;
 using Serilog;
 
@@ -9,18 +9,37 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
     public class ServicoCirurgia : ServicoBase<Cirurgia, ValidadorCirurgia>
     {
         private IRepositorioCirurgia repositorioCirurgia;
+        private IRepositorioConsulta repositorioConsulta;
         private IContextoPersistencia contextoPersistencia;
 
         public ServicoCirurgia(
             IRepositorioCirurgia repositorioCirurgia,
+            IRepositorioConsulta repositorioConsulta,
             IContextoPersistencia contexto)
         {
             this.repositorioCirurgia = repositorioCirurgia;
+            this.repositorioConsulta = repositorioConsulta;
             this.contextoPersistencia = contexto;
         }
 
         public async Task<Result<Cirurgia>> InserirAsync(Cirurgia cirurgia)
         {
+            TimeSpan periodoDescanso = TimeSpan.FromHours(4);
+
+            cirurgia.HoraTermino += periodoDescanso;
+
+            var medicosIds = cirurgia.Medicos.Select(m => m.Id).ToList();
+
+            foreach (var medicoId in medicosIds)
+            {
+                var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data);
+
+                var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data);
+
+                if (JaExisteConsulta || JaExisteCirurgia)
+                    return Result.Fail("Horário indísponivel");
+            }
+
             Result resultado = Validar(cirurgia);
 
             if (resultado.IsFailed)
