@@ -10,10 +10,14 @@ namespace eAgenda.Dominio.ModuloCirurgia
                .NotNull().NotEmpty();
 
             RuleFor(x => x.HoraInicio)
-                .NotEmpty();
+                .NotNull().NotEmpty();
 
             RuleFor(x => x.HoraTermino)
-                .NotEmpty();
+                .NotNull().NotEmpty();
+
+            RuleFor(x => x.Titulo)
+                .MinimumLength(3)
+                .WithMessage("O título da consulta deve ter no mínimo 3 caracteres.");
         }
     }
 }

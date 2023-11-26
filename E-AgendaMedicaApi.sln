@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.5.33530.505
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "E-AgendaMedicaApi", "E-AgendaMedicaApi\E-AgendaMedicaApi.csproj", "{108DDCAD-9575-4A68-922E-6F38257AA874}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "E-AgendaMedicaApi", "E-AgendaMedicaApi\E-AgendaMedicaApi.csproj", "{108DDCAD-9575-4A68-922E-6F38257AA874}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Distribuição", "1 - Distribuição", "{4042DDE4-162F-42B5-99A1-A87FBD10B18F}"
 EndProject
@@ -15,15 +15,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - Infra", "4 - Infra", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Testes", "5 - Testes", "{7D2B3BF8-3B54-4276-B2FF-084B41ECD795}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Aplicacao", "eAgenda.Aplicacao\eAgenda.Aplicacao.csproj", "{FD1D348C-0D21-4339-990F-EE2108F99D27}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Aplicacao", "eAgenda.Aplicacao\eAgenda.Aplicacao.csproj", "{FD1D348C-0D21-4339-990F-EE2108F99D27}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Dominio", "eAgenda.Dominio\eAgenda.Dominio.csproj", "{12213A6C-7828-448F-AC30-E3D63F72D781}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Dominio", "eAgenda.Dominio\eAgenda.Dominio.csproj", "{12213A6C-7828-448F-AC30-E3D63F72D781}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Banco de Dados", "Banco de Dados", "{0F150282-3AF5-4FBC-BD11-D1F161BEA3DE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orm", "Orm", "{8256AEAB-2728-42EE-88E2-26734389FB61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgenda.Infra.Orm", "eAgenda.Infra.Orm\eAgenda.Infra.Orm.csproj", "{F6DC315E-6BC0-4434-8F23-EA66DBFEB303}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "eAgenda.Infra.Orm", "eAgenda.Infra.Orm\eAgenda.Infra.Orm.csproj", "{F6DC315E-6BC0-4434-8F23-EA66DBFEB303}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 Unit", "5.1 Unit", "{4540C1D9-5A08-4D22-9FC7-B5338985AF73}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.TestesUnitarios", "eAgendaMedica.TestesUnitarios\eAgendaMedica.TestesUnitarios.csproj", "{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,10 @@ Global
 		{F6DC315E-6BC0-4434-8F23-EA66DBFEB303}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6DC315E-6BC0-4434-8F23-EA66DBFEB303}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6DC315E-6BC0-4434-8F23-EA66DBFEB303}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +66,8 @@ Global
 		{0F150282-3AF5-4FBC-BD11-D1F161BEA3DE} = {B017E5AC-282F-46D7-B8B1-D7A84C2BF4E1}
 		{8256AEAB-2728-42EE-88E2-26734389FB61} = {0F150282-3AF5-4FBC-BD11-D1F161BEA3DE}
 		{F6DC315E-6BC0-4434-8F23-EA66DBFEB303} = {8256AEAB-2728-42EE-88E2-26734389FB61}
+		{4540C1D9-5A08-4D22-9FC7-B5338985AF73} = {7D2B3BF8-3B54-4276-B2FF-084B41ECD795}
+		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C} = {4540C1D9-5A08-4D22-9FC7-B5338985AF73}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FAA69D2-E5EA-4F49-AC3B-BE65BA072FF6}

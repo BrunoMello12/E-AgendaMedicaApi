@@ -7,13 +7,15 @@ namespace eAgenda.Dominio.ModuloMedico
         public ValidadorMedico()
         {
             RuleFor(x => x.Nome)
+               .NotNull().NotEmpty().MinimumLength(3).Matches("^[A-Za-zÀ-ÿ ]+$");
+
+            RuleFor(x => x.CRM)
+               .CrmMedico()
                .NotNull().NotEmpty();
 
             RuleFor(x => x.Telefone)
-                .Telefone();
-
-            RuleFor(x => x.CRM)
-                .NotNull().NotEmpty();
+               .Telefone()
+               .NotNull().NotEmpty();
         }
     }
 }

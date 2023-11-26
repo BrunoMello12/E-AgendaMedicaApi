@@ -9,7 +9,7 @@ namespace eAgenda.Dominio.ModuloMedico
         public string Nome { get; set; }
         public string Telefone { get; set; }
         public bool Disponivel { get; set; }
-        public string CRM { get; private set; }
+        public string CRM { get; set; }
         public List<Cirurgia> Cirurgias { get; set; }
         public List<Consulta> Consultas { get; set; }
 
