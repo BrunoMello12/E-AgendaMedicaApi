@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,7 +15,15 @@ namespace eAgenda.Infra.Orm.Compartilhado
         {
             var builder = new DbContextOptionsBuilder<eAgendaDbContext>();
 
-            builder.UseSqlServer(@"Data Source=(LOCALDB)\MSSQLLOCALDB;Initial Catalog=eAgendaMedicaOrm;Integrated Security=True");
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory
+                .GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            string connectionString = configuration.GetConnectionString("PostgreSql");
+
+            builder.UseNpgsql(connectionString);
 
             return new eAgendaDbContext(builder.Options);
         }
