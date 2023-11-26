@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace eAgenda.Infra.Orm.Migrations
 {
     /// <inheritdoc />
-    public partial class minhaMigration : Migration
+    public partial class fistMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
