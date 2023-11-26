@@ -1,7 +1,5 @@
 ﻿using eAgenda.Dominio.Compartilhado;
 using eAgenda.Dominio.ModuloCirurgia;
-using eAgenda.Dominio.ModuloConsulta;
-using eAgenda.Dominio.ModuloMedico;
 using eAgenda.Infra.Orm.Compartilhado;
 using Microsoft.EntityFrameworkCore;
 

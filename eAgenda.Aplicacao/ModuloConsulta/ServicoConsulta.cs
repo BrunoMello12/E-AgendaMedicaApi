@@ -49,23 +49,6 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> EditarAsync(Consulta consulta)
         {
-            //TimeSpan periodoDescanso = TimeSpan.FromMinutes(20);
-
-            //consulta.HoraTermino += periodoDescanso;
-
-            //var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
-
-            //var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
-
-            //foreach (var c in await repositorioConsulta.SelecionarTodosAsync())
-            //{
-            //    if (consulta.Id != c.Id)
-            //    {
-            //        if (JaExisteConsulta || JaExisteCirurgia)
-            //            return Result.Fail("Horário indísponivel");
-            //    }
-            //}
-
             var resultado = Validar(consulta);
 
             if (resultado.IsFailed)
