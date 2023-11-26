@@ -29,6 +29,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.1 Unit", "5.1 Unit", "{45
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.TestesUnitarios", "eAgendaMedica.TestesUnitarios\eAgendaMedica.TestesUnitarios.csproj", "{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5.2 IntegrationTests", "5.2 IntegrationTests", "{770B6C55-FD51-483D-A8E8-E637DC03370B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "eAgendaMedica.TesteIntegracao", "eAgendaMedica.TesteIntegracao\eAgendaMedica.TesteIntegracao.csproj", "{AAD0C257-2FE9-4447-BE59-6E3713F17656}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +59,10 @@ Global
 		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAD0C257-2FE9-4447-BE59-6E3713F17656}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAD0C257-2FE9-4447-BE59-6E3713F17656}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAD0C257-2FE9-4447-BE59-6E3713F17656}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAD0C257-2FE9-4447-BE59-6E3713F17656}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +76,8 @@ Global
 		{F6DC315E-6BC0-4434-8F23-EA66DBFEB303} = {8256AEAB-2728-42EE-88E2-26734389FB61}
 		{4540C1D9-5A08-4D22-9FC7-B5338985AF73} = {7D2B3BF8-3B54-4276-B2FF-084B41ECD795}
 		{9F4C0D78-A1E5-4C28-B983-D79E6AB0850C} = {4540C1D9-5A08-4D22-9FC7-B5338985AF73}
+		{770B6C55-FD51-483D-A8E8-E637DC03370B} = {7D2B3BF8-3B54-4276-B2FF-084B41ECD795}
+		{AAD0C257-2FE9-4447-BE59-6E3713F17656} = {770B6C55-FD51-483D-A8E8-E637DC03370B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2FAA69D2-E5EA-4F49-AC3B-BE65BA072FF6}
