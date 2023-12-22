@@ -102,6 +102,8 @@ namespace E_AgendaMedicaApi.Controllers
         [ProducesResponseType(typeof(string[]), 500)]
         public async Task<IActionResult> Editar(Guid id, FormsCirurgiaViewModel cirurgiaViewModel)
         {
+            cirurgiaViewModel.Data = cirurgiaViewModel.Data.ToUniversalTime();
+
             var resultadoSelecao = await servicoCirurgia.SelecionarPorIdAsync(id);
 
             if (resultadoSelecao.IsFailed)
