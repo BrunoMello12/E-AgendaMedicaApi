@@ -24,9 +24,6 @@ namespace E_AgendaMedicaApi.Config.AutomapperConfig
                 .AfterMap<FormsCirurgiaMappingAction>();
 
             CreateMap<Cirurgia, FormsCirurgiaViewModel >()
-                .ForMember(destino => destino.Data, opt => opt.MapFrom(origem => origem.Data.ToString("dd/MM/yyyy")))
-                .ForMember(destino => destino.HoraInicio, opt => opt.MapFrom(origem => origem.HoraInicio.ToString(@"hh\:mm")))
-                .ForMember(destino => destino.HoraTermino, opt => opt.MapFrom(origem => origem.HoraTermino.ToString(@"hh\:mm")))
                 .ForMember(destino => destino.MedicosSelecionados, opt => opt.Ignore())
                 .AfterMap<FormsCirurgiaMappingActionInverso>();
         }
