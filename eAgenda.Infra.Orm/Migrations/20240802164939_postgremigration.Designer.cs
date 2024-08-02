@@ -12,8 +12,8 @@ using eAgenda.Infra.Orm.Compartilhado;
 namespace eAgenda.Infra.Orm.Migrations
 {
     [DbContext(typeof(eAgendaDbContext))]
-    [Migration("20231126212921_PostgreeMigration")]
-    partial class PostgreeMigration
+    [Migration("20240802164939_postgremigration")]
+    partial class postgremigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

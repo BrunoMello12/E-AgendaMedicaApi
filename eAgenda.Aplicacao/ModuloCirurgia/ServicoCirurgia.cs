@@ -24,6 +24,9 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
 
         public async Task<Result<Cirurgia>> InserirAsync(Cirurgia cirurgia)
         {
+            if (cirurgia.HoraInicio >= cirurgia.HoraTermino)
+                return Result.Fail("A hora início não pode ser maior que a hora término");
+
             TimeSpan horarioLimite = new TimeSpan(19, 50, 0);
 
             if (cirurgia.HoraTermino > horarioLimite)
@@ -37,9 +40,9 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
 
             foreach (var medicoId in medicosIds)
             {
-                var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data);
+                var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data, cirurgia.Id);
 
-                var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data);
+                var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data, cirurgia.Id);
 
                 if (JaExisteConsulta || JaExisteCirurgia)
                     return Result.Fail("Horário indísponivel");
@@ -59,6 +62,30 @@ namespace eAgenda.Aplicacao.ModuloCirurgia
 
         public async Task<Result<Cirurgia>> EditarAsync(Cirurgia cirurgia)
         {
+            if (cirurgia.HoraInicio >= cirurgia.HoraTermino)
+                return Result.Fail("A hora início não pode ser maior que a hora término");
+
+            TimeSpan horarioLimite = new TimeSpan(19, 50, 0);
+
+            if (cirurgia.HoraTermino > horarioLimite)
+                return Result.Fail("O horário término limite é 19:50");
+
+            TimeSpan periodoDescanso = TimeSpan.FromHours(4);
+
+            cirurgia.HoraTermino += periodoDescanso;
+
+            var medicosIds = cirurgia.Medicos.Select(m => m.Id).ToList();
+
+            foreach (var medicoId in medicosIds)
+            {
+                var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data, cirurgia.Id);
+
+                var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(medicoId, cirurgia.HoraInicio, cirurgia.HoraTermino, cirurgia.Data, cirurgia.Id);
+
+                if (JaExisteConsulta || JaExisteCirurgia)
+                    return Result.Fail("Horário indísponivel");
+            }
+
             var resultado = Validar(cirurgia);
 
             if (resultado.IsFailed)

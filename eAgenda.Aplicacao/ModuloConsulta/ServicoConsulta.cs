@@ -24,6 +24,9 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> InserirAsync(Consulta consulta)
         {
+            if(consulta.HoraInicio >= consulta.HoraTermino)
+                return Result.Fail("A hora início não pode ser maior que a hora término");
+
             TimeSpan horarioLimite = new TimeSpan(23, 30, 0);
 
             if (consulta.HoraTermino > horarioLimite)
@@ -33,9 +36,9 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
             consulta.HoraTermino += periodoDescanso;
 
-            var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+            var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data, consulta.Id);
 
-            var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data);
+            var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data, consulta.Id);
 
             if (JaExisteConsulta || JaExisteCirurgia)
                 return Result.Fail("Horário indísponivel");
@@ -54,6 +57,25 @@ namespace eAgenda.Aplicacao.ModuloConsulta
 
         public async Task<Result<Consulta>> EditarAsync(Consulta consulta)
         {
+            TimeSpan horarioLimite = new TimeSpan(23, 30, 0);
+
+            if (consulta.HoraTermino > horarioLimite)
+                return Result.Fail("O horário término limite é 23:30");
+
+
+            var JaExisteConsulta = await repositorioConsulta.ExisteConsultaNesseHorarioPorMedicoId(
+                consulta.MedicoId,
+                consulta.HoraInicio,
+                consulta.HoraTermino,
+                consulta.Data,
+                consulta.Id 
+            );
+
+            var JaExisteCirurgia = await repositorioCirurgia.ExisteCirurgiasNesseHorarioPorMedicoId(consulta.MedicoId, consulta.HoraInicio, consulta.HoraTermino, consulta.Data, consulta.Id);
+
+            if (JaExisteConsulta || JaExisteCirurgia)
+                return Result.Fail("Horário indísponivel");
+
             var resultado = Validar(consulta);
 
             if (resultado.IsFailed)
