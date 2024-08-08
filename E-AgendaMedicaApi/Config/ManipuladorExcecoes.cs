@@ -3,27 +3,20 @@ using System.Text.Json;
 
 namespace E_AgendaMedicaApi.Config
 {
-    public class ManipuladorExcecoes
+    public class ManipuladorExcecoes : IMiddleware
     {
-        private readonly RequestDelegate requestDelegate;
-
-        public ManipuladorExcecoes(RequestDelegate requestDelegate)
-        {
-            this.requestDelegate = requestDelegate;
-        }
-
-        public async Task Invoke(HttpContext ctx)
+        public async Task InvokeAsync(HttpContext ctx, RequestDelegate next)
         {
             try
             {
-                await this.requestDelegate(ctx);
+                await next(ctx);
             }
             catch (Exception ex)
             {
                 ctx.Response.StatusCode = 500;
-                ctx.Response.ContentType = "application/json";
+                ctx.Response.ContentType = "*application/json";
 
-                var problema = new
+                var error = new
                 {
                     Sucesso = false,
                     Erros = new List<string> { ex.Message }
@@ -31,7 +24,7 @@ namespace E_AgendaMedicaApi.Config
 
                 Log.Logger.Error(ex, ex.Message);
 
-                ctx.Response.WriteAsync(JsonSerializer.Serialize(problema));
+                ctx.Response.WriteAsync(JsonSerializer.Serialize(error));
             }
         }
     }

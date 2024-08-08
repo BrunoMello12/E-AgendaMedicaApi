@@ -1,0 +1,19 @@
+﻿using Microsoft.AspNetCore.Identity;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Taikandi;
+
+namespace eAgenda.Dominio.ModuloAutenticacao
+{
+    public class Usuario : IdentityUser<Guid>
+    {
+        public string Nome { get; set; }
+        public Usuario()
+        {
+            Id = SequentialGuid.NewGuid();
+        }
+    }
+}

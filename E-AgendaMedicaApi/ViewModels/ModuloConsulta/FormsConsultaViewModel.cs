@@ -7,6 +7,7 @@
         public TimeSpan HoraInicio { get; set; }
         public TimeSpan HoraTermino { get; set; }
         public Guid MedicoId { get; set; }
+        public Guid UsuarioId { get; set; }
 
         public FormsConsultaViewModel()
         {

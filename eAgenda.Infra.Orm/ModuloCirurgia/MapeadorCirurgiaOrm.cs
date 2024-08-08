@@ -15,6 +15,11 @@ namespace eAgenda.Infra.Orm.ModuloCirurgia
             builder.Property(x => x.Data).IsRequired();
             builder.Property(x => x.HoraInicio).IsRequired();
             builder.Property(x => x.HoraTermino).IsRequired();
+
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

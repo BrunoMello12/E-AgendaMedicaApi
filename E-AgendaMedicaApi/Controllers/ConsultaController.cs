@@ -3,12 +3,14 @@ using E_AgendaMedicaApi.Controllers.Shared;
 using E_AgendaMedicaApi.ViewModels.ModuloConsulta;
 using eAgenda.Aplicacao.ModuloConsulta;
 using eAgenda.Dominio.ModuloConsulta;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_AgendaMedicaApi.Controllers
 {
     [Route("api/consultas")]
     [ApiController]
+    [Authorize]
     public class ConsultaController : ApiControllerBase
     {
         private readonly ServicoConsulta servicoConsulta;

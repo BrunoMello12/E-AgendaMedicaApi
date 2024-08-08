@@ -1,5 +1,7 @@
 using E_AgendaMedicaApi.Config;
 using E_AgendaMedicaApi.Config.AutomapperConfig;
+using E_AgendaMedicaApi.Config.IdentityConfig;
+using E_AgendaMedicaApi.Config.TokenConfig;
 using E_AgendaMedicaApi.Filters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.OpenApi.Any;
@@ -32,6 +34,10 @@ namespace E_AgendaMedicaApi
 
             builder.Services.ConfigurarSerilog(builder.Logging);
             builder.Services.ConfigurarAutoMapper();
+            builder.Services.ConfigurarIdentity();
+            //======= Autenticação Config ========= 
+            builder.Services.ConfigurarValidacaoToken(); //configuração do middleware que ira validar o token, a partir de qualquer request
+            //=====================================
             builder.Services.ConfigurarInjecaoDependencia(builder.Configuration);
             builder.Services.ConfigurarSwagger();
             builder.Services.AddCors(opt =>
@@ -56,6 +62,8 @@ namespace E_AgendaMedicaApi
             app.UseCors("Desenvolvimento");
 
             app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

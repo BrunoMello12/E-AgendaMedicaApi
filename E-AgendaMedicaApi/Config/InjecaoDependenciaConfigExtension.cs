@@ -36,6 +36,9 @@ namespace E_AgendaMedicaApi.Config
 
             services.AddTransient<FormsCirurgiaMappingAction>();
             services.AddTransient<FormsCirurgiaMappingActionInverso>();
+
+            services.AddTransient<ITenantProvider, ApiTenantProvider>();
+            services.AddTransient<ManipuladorExcecoes>();
         }
     }
 }

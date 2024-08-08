@@ -21,6 +21,11 @@ namespace eAgenda.Infra.Orm.ModuloConsulta
                 .WithMany(x => x.Consultas)
                 .HasForeignKey(x => x.MedicoId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasOne(x => x.Usuario)
+                .WithMany()
+                .IsRequired()
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

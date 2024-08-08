@@ -9,6 +9,7 @@
                 opt.AddProfile<MedicoProfile>();
                 opt.AddProfile<ConsultaProfile>();
                 opt.AddProfile<CirurgiaProfile>();
+                opt.AddProfile<UsuarioProfile>();
             });
         }
     }
